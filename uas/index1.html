@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slGenzy - Login</title>
+    <title>slGenzy - UAS PBO</title>
     <style>
         * {
             margin: 0;
@@ -19,6 +19,7 @@
             overflow: hidden;
         }
 
+        /* --- Left Section (Visual) --- */
         .left-section {
             flex: 1;
             background: linear-gradient(180deg, #d8b5e8 0%, #e8d5f2 50%, #f0e5f5 100%);
@@ -27,14 +28,6 @@
             justify-content: space-between;
             padding: 40px;
             position: relative;
-        }
-
-        .logo {
-            display: none;
-        }
-
-        .logo span {
-            color: #fbbf24;
         }
 
         .characters {
@@ -54,84 +47,20 @@
             position: relative;
         }
 
-        .character.orange {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
-            border-radius: 50%;
-        }
+        .character.orange { width: 180px; height: 180px; background: linear-gradient(135deg, #ff9a56, #ff6b6b); border-radius: 50%; }
+        .character.purple { width: 140px; height: 220px; background: linear-gradient(135deg, #7c3aed, #6d28d9); border-radius: 30px; }
+        .character.pink { width: 120px; height: 180px; background: linear-gradient(135deg, #ec4899, #d946ef); border-radius: 25px; }
+        .character.yellow { width: 100px; height: 160px; background: linear-gradient(135deg, #fde047, #facc15); border-radius: 20px; }
 
-        .character.purple {
-            width: 140px;
-            height: 220px;
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            border-radius: 30px;
-        }
+        .eyes { display: flex; gap: 20px; position: absolute; top: 30%; }
+        .eye { width: 12px; height: 12px; background: white; border-radius: 50%; position: relative; overflow: hidden; }
+        .pupil { width: 6px; height: 6px; background: #1f2937; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.1s ease; }
+        .mouth { position: absolute; bottom: 30%; width: 40px; height: 3px; background: #1f2937; border-radius: 2px; }
 
-        .character.pink {
-            width: 120px;
-            height: 180px;
-            background: linear-gradient(135deg, #ec4899, #d946ef);
-            border-radius: 25px;
-        }
+        .footer-links { display: flex; gap: 30px; color: #6b7280; font-size: 12px; }
+        .footer-links a { color: #6b7280; text-decoration: none; opacity: 0.8; }
 
-        .character.yellow {
-            width: 100px;
-            height: 160px;
-            background: linear-gradient(135deg, #fde047, #facc15);
-            border-radius: 20px;
-        }
-
-        .eyes {
-            display: flex;
-            gap: 20px;
-            position: absolute;
-            top: 30%;
-        }
-
-        .eye {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pupil {
-            width: 6px;
-            height: 6px;
-            background: #1f2937;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.1s ease;
-        }
-
-        .mouth {
-            position: absolute;
-            bottom: 30%;
-            width: 40px;
-            height: 3px;
-            background: #1f2937;
-            border-radius: 2px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            color: #fff;
-            font-size: 12px;
-        }
-
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
-            opacity: 0.8;
-        }
-
+        /* --- Right Section (Forms) --- */
         .right-section {
             flex: 1;
             background: #f5f5f0;
@@ -139,6 +68,7 @@
             align-items: center;
             justify-content: center;
             padding: 40px;
+            transition: background 0.5s ease;
         }
 
         .right-section.welcome-bg {
@@ -147,356 +77,72 @@
             overflow: hidden;
         }
 
-        .right-section.welcome-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.03) 10px,
-                rgba(255, 255, 255, 0.03) 20px
-            );
-            animation: shimmer 20s linear infinite;
-        }
+        .login-container { width: 100%; max-width: 400px; z-index: 2; }
+        .login-container h2 { font-size: 32px; color: #1f2937; margin-bottom: 8px; font-weight: 700; }
+        .subtitle { color: #6b7280; font-size: 14px; margin-bottom: 40px; }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
-            100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
-        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; color: #1f2937; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .input-wrapper { position: relative; }
+        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; }
+        .form-group input:focus { outline: none; border-color: #8b5cf6; }
 
-        .right-section.welcome-bg::after {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-            border-radius: 50%;
-            top: -100px;
-            right: -100px;
-            animation: float 8s ease-in-out infinite;
-        }
+        .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; }
 
-        .login-container {
-            width: 100%;
-            max-width: 400px;
-        }
+        .btn-login { width: 100%; padding: 14px; background: #7c3aed; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-login:hover { background: #6d28d9; transform: translateY(-2px); }
 
-        .login-container h2 {
-            font-size: 32px;
-            color: #1f2937;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #1f2937;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 14px;
-            background: #fff;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #8b5cf6;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #9ca3af;
-            font-size: 20px;
-        }
-
-        .remember-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-
-        .remember-row label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #6b7280;
-        }
-
-        .remember-row a {
-            color: #8b5cf6;
-            text-decoration: none;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: #7c3aed;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-login:hover {
-            background: #6d28d9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 24px 0;
-            color: #9ca3af;
-            font-size: 14px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e5e7eb;
-        }
-
-        .divider::before {
-            margin-right: 16px;
-        }
-
-        .divider::after {
-            margin-left: 16px;
-        }
-
-        .btn-google {
-            width: 100%;
-            padding: 14px;
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-        }
-
-        .btn-google:hover {
-            background: #f9fafb;
-        }
-
-        .signup-text {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        .signup-text a {
-            color: #8b5cf6;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .welcome-page {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-page h2 {
-            font-size: 48px;
-            color: white;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .welcome-page .subtitle-welcome {
-            font-size: 24px;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 40px;
-            font-weight: 500;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 20px); }
-        }
+        /* --- Welcome Page Styles --- */
+        .welcome-page { text-align: center; color: white; }
+        .welcome-page h2 { color: white; font-size: 42px; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .subtitle-welcome { font-size: 20px; margin-bottom: 30px; opacity: 0.9; }
 
         .user-info-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            margin: 30px 0;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .user-info-card p {
-            font-size: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
             color: #4b5563;
-            margin: 15px 0;
+            text-align: left;
+            line-height: 1.8;
         }
 
-        .user-info-card strong {
-            color: #8b5cf6;
-            font-weight: 700;
-        }
+        .user-info-card p { border-bottom: 1px solid #f3f4f6; padding: 5px 0; }
+        .user-info-card p:last-child { border-bottom: none; }
+        .user-info-card strong { color: #7c3aed; }
 
-        .btn-logout {
-            padding: 16px 50px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
+        .btn-logout { padding: 14px 40px; background: #f5576c; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .btn-logout:hover { background: #d43f52; transform: scale(1.05); }
 
-        .btn-logout:hover {
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
-        }
+        .hidden { display: none; }
 
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .left-section {
-                display: none;
-            }
-        }
+        @media (max-width: 768px) { .left-section { display: none; } }
     </style>
 </head>
 <body>
-    <!-- Left Section -->
-    <div class="left-section">
-        <div class="logo">
-            slGen<span>ž</span>y
-        </div>
-        
-        <div class="characters">
-            <div class="character orange">
-                <div class="eyes">
-                    <div class="eye"><div class="pupil"></div></div>
-                    <div class="eye"><div class="pupil"></div></div>
-                </div>
-            </div>
-            <div class="character purple">
-                <div class="eyes">
-                    <div class="eye"><div class="pupil"></div></div>
-                    <div class="eye"><div class="pupil"></div></div>
-                </div>
-            </div>
-            <div class="character pink">
-                <div class="eyes">
-                    <div class="eye"><div class="pupil"></div></div>
-                    <div class="eye"><div class="pupil"></div></div>
-                </div>
-            </div>
-            <div class="character yellow">
-                <div class="eyes">
-                    <div class="eye"><div class="pupil"></div></div>
-                    <div class="eye"><div class="pupil"></div></div>
-                </div>
-                <div class="mouth"></div>
-            </div>
-        </div>
 
+    <div class="left-section">
+        <div class="characters">
+            <div class="character orange"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
+            <div class="character purple"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
+            <div class="character yellow"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="mouth"></div></div>
+        </div>
         <div class="footer-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="#">Contact</a>
         </div>
     </div>
 
-    <!-- Right Section -->
     <div class="right-section">
-        <!-- Login Page -->
         <div id="loginPage" class="login-container">
-            <h2>Login to my channel PBO</h2>
-            <p class="subtitle">Hi friends!</p>
-
+            <h2>Login PBO</h2>
+            <p class="subtitle">Silakan masuk ke akun anda</p>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <input type="text" id="username" placeholder="Username" required>
                 </div>
-
                 <div class="form-group">
                     <label>Password</label>
                     <div class="input-wrapper">
@@ -504,182 +150,113 @@
                         <span class="toggle-password" onclick="togglePassword()">👁</span>
                     </div>
                 </div>
-
-                <div class="remember-row">
-                    <label>
-                        <input type="checkbox">
-                        Keep me signed in for 30 days
-                    </label>
-                    <a href="#">Forgot password?</a>
-                </div>
-
                 <button type="submit" class="btn-login">Sign in</button>
-
-                <div class="divider">OR</div>
-
-                <button type="button" class="btn-google">
-                    <svg width="20" height="20" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    Continue with Google
-                </button>
-
-                <p class="signup-text">
-                    New here? <a href="#">Create an account</a>
-                </p>
             </form>
         </div>
 
-        <!-- Welcome Page -->
         <div id="welcomePage" class="login-container welcome-page hidden">
             <h2>Hi Friends!</h2>
-            <p class="subtitle-welcome">Welcome to my application Baihaqy</p>
+            <p class="subtitle-welcome">Welcome to my application</p>
+            
             <div class="user-info-card">
-                <p><strong>Username:</strong> <span id="displayUsername"></span></p>
-                <p><strong>Status:</strong> Login Berhasil ✓</p>
+                <p><strong>Nama:</strong> Baihaqy</p>
+                <p><strong>NIM:</strong> 20240011128</p>
+                <p><strong>Kelas:</strong> IM241</p>
+                <p>Ujian Akhir Semester Pemrograman Berorientasi Objek</p>
+                <p>Mahasiswa Universitas</p>
             </div>
+            
             <button class="btn-logout" onclick="logout()">Logout</button>
         </div>
     </div>
 
     <script>
-        // Class untuk mengelola akun
+        // --- OOP: Class Account ---
         class Account {
             constructor(username, password) {
                 this.username = username;
                 this.password = password;
             }
-
-            validate(inputUsername, inputPassword) {
-                return this.username === inputUsername && this.password === inputPassword;
-            }
         }
 
-        // Class untuk mengelola sistem login
+        // --- OOP: Class Login System ---
         class LoginSystem {
             constructor() {
-                this.accounts = [];
                 this.initializeAccounts();
                 this.checkLoginStatus();
             }
 
+            // LocalStorage (File I/O Simulation)
             initializeAccounts() {
-                // Membuat array accounts dengan 3 akun
-                const accountsData = [
-                    { username: "user", password: "123" },
-                    { username: "admin", password: "admin" },
-                    { username: "gant", password: "gant" }
-                ];
-
-                // Menggunakan list/array untuk menyimpan akun
-                this.accounts = accountsData.map(data => new Account(data.username, data.password));
-
-                // Simpan ke localStorage dengan JSON.stringify
-                localStorage.setItem('accounts', JSON.stringify(accountsData));
+                if (!localStorage.getItem('accounts')) {
+                    const accountsData = [
+                        { username: "user", password: "123" },
+                        { username: "admin", password: "admin" },
+                        { username: "baihaqy", password: "pbo" }
+                    ];
+                    localStorage.setItem('accounts', JSON.stringify(accountsData));
+                }
             }
 
             checkLoginStatus() {
                 const loggedInUser = localStorage.getItem('loggedInUser');
                 if (loggedInUser) {
-                    // Parse JSON dari localStorage
-                    const userData = JSON.parse(loggedInUser);
-                    this.showWelcomePage(userData.username);
+                    this.showWelcomePage();
                 }
             }
 
             login(username, password) {
-                // Parse accounts dari localStorage
                 const storedAccounts = JSON.parse(localStorage.getItem('accounts'));
-                
-                // Trim spasi untuk menghindari error input
-                const trimmedUsername = username.trim();
-                const trimmedPassword = password.trim();
-                
-                // Cek apakah username dan password cocok menggunakan find pada array
-                const account = storedAccounts.find(acc => 
-                    acc.username === trimmedUsername && acc.password === trimmedPassword
-                );
+                const user = storedAccounts.find(acc => acc.username === username && acc.password === password);
 
-                if (account) {
-                    // Login berhasil
-                    const userData = { username: account.username };
-                    
-                    // Simpan ke localStorage dengan JSON.stringify
-                    localStorage.setItem('loggedInUser', JSON.stringify(userData));
-                    
-                    alert(`Login Berhasil!\n\nHi friends!`);
-                    this.showWelcomePage(account.username);
+                if (user) {
+                    localStorage.setItem('loggedInUser', JSON.stringify(user));
+                    alert("Login Berhasil!");
+                    this.showWelcomePage();
                 } else {
-                    // Gagal login
-                    alert('Gagal Login!\n\nUsername atau password salah.');
+                    alert("Username atau Password Salah!");
                 }
             }
 
-            showWelcomePage(username) {
+            showWelcomePage() {
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('welcomePage').classList.remove('hidden');
-                document.getElementById('displayUsername').textContent = username;
-                
-                // Tambahkan class untuk background mewah
                 document.querySelector('.right-section').classList.add('welcome-bg');
             }
 
             logout() {
                 localStorage.removeItem('loggedInUser');
-                document.getElementById('loginPage').classList.remove('hidden');
-                document.getElementById('welcomePage').classList.add('hidden');
-                document.getElementById('loginForm').reset();
-                
-                // Hapus class background mewah
-                document.querySelector('.right-section').classList.remove('welcome-bg');
+                location.reload(); // Refresh untuk kembali ke tampilan login
             }
         }
 
-        // Inisialisasi sistem login dengan class
-        const loginSystem = new LoginSystem();
+        // Inisialisasi Object
+        const app = new LoginSystem();
 
-        // Event listener untuk form login
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // Event Listeners
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            loginSystem.login(username, password);
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            app.login(u, p);
         });
 
-        // Fungsi logout
-        function logout() {
-            loginSystem.logout();
-        }
+        function logout() { app.logout(); }
 
-        // Fungsi toggle password visibility
         function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
+            const p = document.getElementById('password');
+            p.type = p.type === 'password' ? 'text' : 'password';
         }
 
-        // Eye tracking - mata mengikuti kursor
-        document.addEventListener('mousemove', function(e) {
+        // Eye Tracking Logic
+        document.addEventListener('mousemove', (e) => {
             const pupils = document.querySelectorAll('.pupil');
-            
             pupils.forEach(pupil => {
-                const eye = pupil.parentElement;
-                const eyeRect = eye.getBoundingClientRect();
-                const eyeCenterX = eyeRect.left + eyeRect.width / 2;
-                const eyeCenterY = eyeRect.top + eyeRect.height / 2;
-                
-                const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
-                const distance = Math.min(3, Math.hypot(e.clientX - eyeCenterX, e.clientY - eyeCenterY) / 50);
-                
-                const pupilX = Math.cos(angle) * distance;
-                const pupilY = Math.sin(angle) * distance;
-                
-                pupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+                const rect = pupil.parentElement.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width * 100;
+                const y = (e.clientY - rect.top) / rect.height * 100;
+                pupil.style.left = `${Math.min(max=70, Math.max(30, x))}%`;
+                pupil.style.top = `${Math.min(max=70, Math.max(30, y))}%`;
             });
         });
     </script>
