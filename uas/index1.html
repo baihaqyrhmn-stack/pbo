@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slGenzy - UAS PBO</title>
+    <title>slGenzy - UAS PBO Baihaqy</title>
     <style>
         * {
             margin: 0;
@@ -57,9 +57,6 @@
         .pupil { width: 6px; height: 6px; background: #1f2937; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.1s ease; }
         .mouth { position: absolute; bottom: 30%; width: 40px; height: 3px; background: #1f2937; border-radius: 2px; }
 
-        .footer-links { display: flex; gap: 30px; color: #6b7280; font-size: 12px; }
-        .footer-links a { color: #6b7280; text-decoration: none; opacity: 0.8; }
-
         /* --- Right Section (Forms) --- */
         .right-section {
             flex: 1;
@@ -83,10 +80,8 @@
 
         .form-group { margin-bottom: 24px; }
         .form-group label { display: block; color: #1f2937; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-        .input-wrapper { position: relative; }
         .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; }
-        .form-group input:focus { outline: none; border-color: #8b5cf6; }
-
+        .input-wrapper { position: relative; }
         .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; }
 
         .btn-login { width: 100%; padding: 14px; background: #7c3aed; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
@@ -94,7 +89,7 @@
 
         /* --- Welcome Page Styles --- */
         .welcome-page { text-align: center; color: white; }
-        .welcome-page h2 { color: white; font-size: 42px; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .welcome-page h2 { color: white; font-size: 42px; margin-bottom: 10px; }
         .subtitle-welcome { font-size: 20px; margin-bottom: 30px; opacity: 0.9; }
 
         .user-info-card {
@@ -105,18 +100,17 @@
             margin: 20px 0;
             color: #4b5563;
             text-align: left;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
-        .user-info-card p { border-bottom: 1px solid #f3f4f6; padding: 5px 0; }
+        .user-info-card p { border-bottom: 1px solid #f3f4f6; padding: 8px 0; font-size: 15px; }
         .user-info-card p:last-child { border-bottom: none; }
         .user-info-card strong { color: #7c3aed; }
 
         .btn-logout { padding: 14px 40px; background: #f5576c; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        .btn-logout:hover { background: #d43f52; transform: scale(1.05); }
+        .btn-logout:hover { transform: scale(1.05); background: #d43f52; }
 
         .hidden { display: none; }
-
         @media (max-width: 768px) { .left-section { display: none; } }
     </style>
 </head>
@@ -126,22 +120,19 @@
         <div class="characters">
             <div class="character orange"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
             <div class="character purple"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
+            <div class="character pink"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
             <div class="character yellow"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="mouth"></div></div>
-        </div>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
         </div>
     </div>
 
     <div class="right-section">
         <div id="loginPage" class="login-container">
             <h2>Login PBO</h2>
-            <p class="subtitle">Silakan masuk ke akun anda</p>
+            <p class="subtitle">Hi Friends! Selamat datang kembali.</p>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="text" id="username" placeholder="Masukkan username" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -159,12 +150,7 @@
             <p class="subtitle-welcome">Welcome to my application</p>
             
             <div class="user-info-card">
-                <p><strong>Nama:</strong> Baihaqy</p>
-                <p><strong>NIM:</strong> 20240011128</p>
-                <p><strong>Kelas:</strong> IM241</p>
-                <p>Ujian Akhir Semester Pemrograman Berorientasi Objek</p>
-                <p>Mahasiswa Universitas</p>
-            </div>
+                </div>
             
             <button class="btn-logout" onclick="logout()">Logout</button>
         </div>
@@ -186,7 +172,7 @@
                 this.checkLoginStatus();
             }
 
-            // LocalStorage (File I/O Simulation)
+            // LocalStorage (Simulasi File I/O)
             initializeAccounts() {
                 if (!localStorage.getItem('accounts')) {
                     const accountsData = [
@@ -199,22 +185,22 @@
             }
 
             checkLoginStatus() {
-                const loggedInUser = localStorage.getItem('loggedInUser');
-                if (loggedInUser) {
+                const session = localStorage.getItem('loggedInUser');
+                if (session) {
                     this.showWelcomePage();
                 }
             }
 
             login(username, password) {
-                const storedAccounts = JSON.parse(localStorage.getItem('accounts'));
-                const user = storedAccounts.find(acc => acc.username === username && acc.password === password);
+                const accounts = JSON.parse(localStorage.getItem('accounts'));
+                const found = accounts.find(a => a.username === username && a.password === password);
 
-                if (user) {
-                    localStorage.setItem('loggedInUser', JSON.stringify(user));
+                if (found) {
+                    localStorage.setItem('loggedInUser', JSON.stringify(found));
                     alert("Login Berhasil!");
                     this.showWelcomePage();
                 } else {
-                    alert("Username atau Password Salah!");
+                    alert("Gagal Login! Username/Password salah.");
                 }
             }
 
@@ -222,23 +208,31 @@
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('welcomePage').classList.remove('hidden');
                 document.querySelector('.right-section').classList.add('welcome-bg');
+
+                // Mengisi kartu profil dengan 5 baris sesuai permintaan
+                const card = document.querySelector('.user-info-card');
+                card.innerHTML = `
+                    <p><strong>Nama:</strong> Baihaqy</p>
+                    <p><strong>NIM:</strong> 20240011128</p>
+                    <p><strong>Kelas:</strong> IM241</p>
+                    <p>Ujian Akhir Semester Pemrograman Berorientasi Objek</p>
+                    <p>Mahasiswa Universitas</p>
+                `;
             }
 
             logout() {
                 localStorage.removeItem('loggedInUser');
-                location.reload(); // Refresh untuk kembali ke tampilan login
+                location.reload(); 
             }
         }
 
-        // Inisialisasi Object
+        // Inisialisasi
         const app = new LoginSystem();
 
-        // Event Listeners
+        // Form Submission
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            app.login(u, p);
+            app.login(document.getElementById('username').value, document.getElementById('password').value);
         });
 
         function logout() { app.logout(); }
@@ -248,15 +242,15 @@
             p.type = p.type === 'password' ? 'text' : 'password';
         }
 
-        // Eye Tracking Logic
+        // Eye Tracking
         document.addEventListener('mousemove', (e) => {
             const pupils = document.querySelectorAll('.pupil');
             pupils.forEach(pupil => {
                 const rect = pupil.parentElement.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width * 100;
                 const y = (e.clientY - rect.top) / rect.height * 100;
-                pupil.style.left = `${Math.min(max=70, Math.max(30, x))}%`;
-                pupil.style.top = `${Math.min(max=70, Math.max(30, y))}%`;
+                pupil.style.left = `${Math.min(70, Math.max(30, x))}%`;
+                pupil.style.top = `${Math.min(70, Math.max(30, y))}%`;
             });
         });
     </script>
