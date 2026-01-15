@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slGenzy - UAS PBO Baihaqy</title>
+    <title>slGenzy - Login PBO Baihaqy</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
             overflow: hidden;
         }
 
-        /* --- Left Section (Visual) --- */
+        /* --- Sisi Kiri (Karakter) --- */
         .left-section {
             flex: 1;
             background: linear-gradient(180deg, #d8b5e8 0%, #e8d5f2 50%, #f0e5f5 100%);
@@ -52,12 +52,17 @@
         .character.pink { width: 120px; height: 180px; background: linear-gradient(135deg, #ec4899, #d946ef); border-radius: 25px; }
         .character.yellow { width: 100px; height: 160px; background: linear-gradient(135deg, #fde047, #facc15); border-radius: 20px; }
 
-        .eyes { display: flex; gap: 20px; position: absolute; top: 30%; }
+        .eyes { display: flex; gap: 20px; position: absolute; top: 35%; }
         .eye { width: 12px; height: 12px; background: white; border-radius: 50%; position: relative; overflow: hidden; }
         .pupil { width: 6px; height: 6px; background: #1f2937; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.1s ease; }
-        .mouth { position: absolute; bottom: 30%; width: 40px; height: 3px; background: #1f2937; border-radius: 2px; }
+        
+        /* Mulut untuk semua karakter */
+        .mouth { position: absolute; bottom: 30%; width: 35px; height: 3px; background: #1f2937; border-radius: 2px; }
 
-        /* --- Right Section (Forms) --- */
+        .footer-links { display: flex; gap: 30px; color: #fff; font-size: 12px; opacity: 0.8; }
+        .footer-links a { color: #fff; text-decoration: none; }
+
+        /* --- Sisi Kanan (Form & Welcome) --- */
         .right-section {
             flex: 1;
             background: #f5f5f0;
@@ -65,50 +70,46 @@
             align-items: center;
             justify-content: center;
             padding: 40px;
-            transition: background 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         .right-section.welcome-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            position: relative;
-            overflow: hidden;
         }
 
-        .login-container { width: 100%; max-width: 400px; z-index: 2; }
+        .login-container { width: 100%; max-width: 400px; }
         .login-container h2 { font-size: 32px; color: #1f2937; margin-bottom: 8px; font-weight: 700; }
         .subtitle { color: #6b7280; font-size: 14px; margin-bottom: 40px; }
 
         .form-group { margin-bottom: 24px; }
         .form-group label { display: block; color: #1f2937; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; }
         .input-wrapper { position: relative; }
-        .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; }
+        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; }
+        
+        .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; font-size: 20px; }
 
         .btn-login { width: 100%; padding: 14px; background: #7c3aed; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
         .btn-login:hover { background: #6d28d9; transform: translateY(-2px); }
 
-        /* --- Welcome Page Styles --- */
+        /* --- Welcome Page (Output) --- */
         .welcome-page { text-align: center; color: white; }
-        .welcome-page h2 { color: white; font-size: 42px; margin-bottom: 10px; }
-        .subtitle-welcome { font-size: 20px; margin-bottom: 30px; opacity: 0.9; }
+        .welcome-page h2 { font-size: 48px; margin-bottom: 15px; }
+        .subtitle-welcome { font-size: 24px; margin-bottom: 40px; }
 
         .user-info-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
+            padding: 35px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
-            color: #4b5563;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
             text-align: left;
-            line-height: 1.6;
+            color: #4b5563;
         }
 
-        .user-info-card p { border-bottom: 1px solid #f3f4f6; padding: 8px 0; font-size: 15px; }
-        .user-info-card p:last-child { border-bottom: none; }
-        .user-info-card strong { color: #7c3aed; }
+        .user-info-card p { font-size: 18px; margin: 12px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .user-info-card strong { color: #8b5cf6; }
 
-        .btn-logout { padding: 14px 40px; background: #f5576c; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        .btn-logout:hover { transform: scale(1.05); background: #d43f52; }
+        .btn-logout { padding: 16px 50px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4); }
 
         .hidden { display: none; }
         @media (max-width: 768px) { .left-section { display: none; } }
@@ -118,21 +119,38 @@
 
     <div class="left-section">
         <div class="characters">
-            <div class="character orange"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
-            <div class="character purple"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
-            <div class="character pink"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
-            <div class="character yellow"><div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div><div class="mouth"></div></div>
+            <div class="character orange">
+                <div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="character purple">
+                <div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="character pink">
+                <div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="character yellow">
+                <div class="eyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact</a>
         </div>
     </div>
 
     <div class="right-section">
         <div id="loginPage" class="login-container">
-            <h2>Login PBO</h2>
-            <p class="subtitle">Hi Friends! Selamat datang kembali.</p>
+            <h2>Login to my channel PBO</h2>
+            <p class="subtitle">Hi friends!</p>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="username" placeholder="Masukkan username" required>
+                    <input type="text" id="username" placeholder="Enter your username" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -147,105 +165,74 @@
 
         <div id="welcomePage" class="login-container welcome-page hidden">
             <h2>Hi Friends!</h2>
-            <p class="subtitle-welcome">Welcome to my application</p>
-            
+            <p class="subtitle-welcome">Welcome to my application Baihaqy</p>
             <div class="user-info-card">
-                </div>
-            
+                <p><strong>Nama:</strong> Baihaqy</p>
+                <p><strong>NIM:</strong> 20240011128</p>
+                <p><strong>Kelas:</strong> IM241</p>
+                <p>Ujian Akhir Semester Pemrograman Berorientasi Objek</p>
+                <p>Mahasiswa Universitas</p>
+            </div>
             <button class="btn-logout" onclick="logout()">Logout</button>
         </div>
     </div>
 
     <script>
-        // --- OOP: Class Account ---
-        class Account {
-            constructor(username, password) {
-                this.username = username;
-                this.password = password;
-            }
-        }
-
-        // --- OOP: Class Login System ---
         class LoginSystem {
             constructor() {
                 this.initializeAccounts();
-                this.checkLoginStatus();
+                this.checkLogin();
             }
 
-            // LocalStorage (Simulasi File I/O)
             initializeAccounts() {
                 if (!localStorage.getItem('accounts')) {
-                    const accountsData = [
-                        { username: "user", password: "123" },
-                        { username: "admin", password: "admin" },
-                        { username: "baihaqy", password: "pbo" }
-                    ];
-                    localStorage.setItem('accounts', JSON.stringify(accountsData));
+                    localStorage.setItem('accounts', JSON.stringify([{username: "baihaqy", password: "pbo"}]));
                 }
             }
 
-            checkLoginStatus() {
-                const session = localStorage.getItem('loggedInUser');
-                if (session) {
-                    this.showWelcomePage();
-                }
+            checkLogin() {
+                if (localStorage.getItem('isLoggedIn')) this.showWelcome();
             }
 
-            login(username, password) {
-                const accounts = JSON.parse(localStorage.getItem('accounts'));
-                const found = accounts.find(a => a.username === username && a.password === password);
-
-                if (found) {
-                    localStorage.setItem('loggedInUser', JSON.stringify(found));
+            login(u, p) {
+                const accs = JSON.parse(localStorage.getItem('accounts'));
+                if (accs.find(a => a.username === u && a.password === p)) {
+                    localStorage.setItem('isLoggedIn', 'true');
                     alert("Login Berhasil!");
-                    this.showWelcomePage();
+                    this.showWelcome();
                 } else {
-                    alert("Gagal Login! Username/Password salah.");
+                    alert("Username atau password salah!");
                 }
             }
 
-            showWelcomePage() {
+            showWelcome() {
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('welcomePage').classList.remove('hidden');
                 document.querySelector('.right-section').classList.add('welcome-bg');
-
-                // Mengisi kartu profil dengan 5 baris sesuai permintaan
-                const card = document.querySelector('.user-info-card');
-                card.innerHTML = `
-                    <p><strong>Nama:</strong> Baihaqy</p>
-                    <p><strong>NIM:</strong> 20240011128</p>
-                    <p><strong>Kelas:</strong> IM241</p>
-                    <p>Ujian Akhir Semester Pemrograman Berorientasi Objek</p>
-                    <p>Mahasiswa Universitas</p>
-                `;
             }
 
             logout() {
-                localStorage.removeItem('loggedInUser');
-                location.reload(); 
+                localStorage.removeItem('isLoggedIn');
+                location.reload();
             }
         }
 
-        // Inisialisasi
         const app = new LoginSystem();
 
-        // Form Submission
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        document.getElementById('loginForm').onsubmit = (e) => {
             e.preventDefault();
             app.login(document.getElementById('username').value, document.getElementById('password').value);
-        });
+        };
 
         function logout() { app.logout(); }
-
         function togglePassword() {
             const p = document.getElementById('password');
             p.type = p.type === 'password' ? 'text' : 'password';
         }
 
-        // Eye Tracking
+        // Mata mengikuti kursor
         document.addEventListener('mousemove', (e) => {
-            const pupils = document.querySelectorAll('.pupil');
-            pupils.forEach(pupil => {
+            document.querySelectorAll('.pupil').forEach(pupil => {
                 const rect = pupil.parentElement.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width * 100;
                 const y = (e.clientY - rect.top) / rect.height * 100;
